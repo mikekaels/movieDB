@@ -485,11 +485,8 @@ extension MovieDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print(self.moreLikeTheseUrl[indexPath.row].1)
-//        vc.moreLikeTheseUrl = getRandomMoreLikeThis()
-//        vc.movies = self.movieList
-//
-//        vc.movieId = self.moreLikeTheseUrl[indexPath.row].1
-//        navigationController?.pushViewController(vc, animated: true)
+        let movieId = self.moreLikeTheseUrl[indexPath.row].1
+        presentor?.goToNextMovie(movies: self.movieList, moreLikeThis: self.moreLikeTheseUrl, movieId: movieId, from: self)
     }
     
     func getRandomMoreLikeThis() -> [(String, Int)]  {

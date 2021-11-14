@@ -17,6 +17,7 @@ protocol MovieDetailsViewToPresenterProtocol: AnyObject {
     func fetchMovieDetails(movieId: Int)
     func fetchMovieVideo(movieId: Int)
     func fetchMovieReviews(movieId: Int, page: Int)
+    func goToNextMovie(movies: [Movie], moreLikeThis: [(String, Int)], movieId: Int, from: MovieDetailsVC)
 }
 
 protocol MovieDetailsPresenterToInteractorProtocol: AnyObject {
@@ -40,4 +41,5 @@ protocol MovieDetailsInteractorToPresenterProtocol: AnyObject {
 
 protocol MovieDetailsPresenterToRouterProtocol: AnyObject {
     func createModule() -> MovieDetailsVC
+    func goToNextMovie(movies: [Movie], moreLikeThis: [(String, Int)], movieId: Int, from: MovieDetailsVC)
 }

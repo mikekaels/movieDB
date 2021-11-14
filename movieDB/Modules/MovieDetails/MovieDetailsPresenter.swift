@@ -9,8 +9,6 @@
 class MovieDetailsPresenter: MovieDetailsViewToPresenterProtocol {
     
     
-    
-    
     var view: MovieDetailsPresenterToViewProtocol?
     var router: MovieDetailsPresenterToRouterProtocol?
     var interactor: MovieDetailsPresenterToInteractorProtocol?
@@ -25,6 +23,10 @@ class MovieDetailsPresenter: MovieDetailsViewToPresenterProtocol {
     
     func fetchMovieReviews(movieId: Int, page: Int) {
         interactor?.fetchMovieReviews(movieId: movieId, page: page)
+    }
+    
+    func goToNextMovie(movies: [Movie], moreLikeThis: [(String, Int)], movieId: Int, from: MovieDetailsVC) {
+        router?.goToNextMovie(movies: movies, moreLikeThis: moreLikeThis, movieId: movieId, from: from)
     }
 }
 

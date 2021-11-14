@@ -9,6 +9,8 @@
 import UIKit
 
 public class MovieDetailsRouter: MovieDetailsPresenterToRouterProtocol{
+    
+    
     public static let shared = MovieDetailsRouter()
     
     func initialize() -> MovieDetailsVC {
@@ -34,5 +36,12 @@ public class MovieDetailsRouter: MovieDetailsPresenterToRouterProtocol{
         return view
     }
     
-    
+    func goToNextMovie(movies: [Movie], moreLikeThis: [(String, Int)], movieId: Int, from: MovieDetailsVC) {
+        let vc = createModule()
+        vc.movieId = movieId
+        vc.movieList = movies
+        vc.moreLikeTheseUrl = moreLikeThis
+        
+        from.navigationController?.pushViewController(vc, animated: true)
+    }
 }
