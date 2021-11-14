@@ -9,6 +9,8 @@
 class MovieDetailsPresenter: MovieDetailsViewToPresenterProtocol {
     
     
+    
+    
     var view: MovieDetailsPresenterToViewProtocol?
     var router: MovieDetailsPresenterToRouterProtocol?
     var interactor: MovieDetailsPresenterToInteractorProtocol?
@@ -20,6 +22,10 @@ class MovieDetailsPresenter: MovieDetailsViewToPresenterProtocol {
     func fetchMovieVideo(movieId: Int) {
         interactor?.fetchMovieVideo(movieId: movieId)
     }
+    
+    func fetchMovieReviews(movieId: Int, page: Int) {
+        interactor?.fetchMovieReviews(movieId: movieId, page: page)
+    }
 }
 
 extension MovieDetailsPresenter: MovieDetailsInteractorToPresenterProtocol {
@@ -29,5 +35,9 @@ extension MovieDetailsPresenter: MovieDetailsInteractorToPresenterProtocol {
     
     func didFetchMovieDetails(movieDetails: MovieDetails) {
         view?.didFetchMovieDetails(movieDetails: movieDetails)
+    }
+    
+    func didFetchMovieReviews(movieReviews: [Review], page: Int, totalPages: Int) {
+        view?.didFetchMovieReviews(movieReviews: movieReviews, page: page, totalPages: totalPages)
     }
 }
