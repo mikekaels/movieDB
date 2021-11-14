@@ -26,6 +26,8 @@ class MovieDetailsVC: UIViewController {
     var reviewTotalPage: Int = 0
     var selectedIndex: IndexPath?
     
+    var isPaginating = false
+    
     let one = UIButton().createSegmentedControlButton(setTitle: "More Like This")
     let two = UIButton().createSegmentedControlButton(setTitle: "Trailer")
     let three = UIButton().createSegmentedControlButton(setTitle: "Reviews")
@@ -362,11 +364,12 @@ class MovieDetailsVC: UIViewController {
 
 extension MovieDetailsVC: MovieDetailsPresenterToViewProtocol {
     func didFetchMovieReviews(movieReviews: [Review], page: Int, totalPages: Int) {
-        reviewList = movieReviews
+        reviewList.append(contentsOf: movieReviews)
         reviewPage = page
         reviewTotalPage = totalPages
         
         DispatchQueue.main.async {
+            self.reviewsTable.tableFooterView = nil
             self.reviewsTable.reloadData()
         }
         print("REVIEWS: ",movieReviews)
@@ -450,7 +453,22 @@ extension MovieDetailsVC: UITableViewDelegate, UITableViewDataSource {
         reviewsTable.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
     }
     
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if reviewPage < reviewTotalPage && position > (reviewsTable.contentSize.height - 100 - scrollView.frame.size.height) {
+            self.reviewsTable.tableFooterView = createSpinnerFooter()
+            fetchMovieReviews()
+        }
+    }
 }
 
 extension MovieDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource {
