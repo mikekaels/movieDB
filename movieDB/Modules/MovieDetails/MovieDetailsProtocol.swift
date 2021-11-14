@@ -16,24 +16,28 @@ protocol MovieDetailsViewToPresenterProtocol: AnyObject {
     
     func fetchMovieDetails(movieId: Int)
     func fetchMovieVideo(movieId: Int)
-}
-
-protocol MovieDetailsPresenterToRouterProtocol: AnyObject {
-    func createModule() -> MovieDetailsVC
-}
-
-protocol MovieDetailsPresenterToViewProtocol: AnyObject {
-    func didFetchMovieDetails(movieDetails: MovieDetails)
-    func didFetchMovieVideo(movieVideo: [MovieVideo])
-}
-
-protocol MovieDetailsInteractorToPresenterProtocol: AnyObject {
-    func didFetchMovieDetails(movieDetails: MovieDetails)
-    func didFetchMovieVideo(movieVideo: [MovieVideo])
+    func fetchMovieReviews(movieId: Int, page: Int)
 }
 
 protocol MovieDetailsPresenterToInteractorProtocol: AnyObject {
     var presenter: MovieDetailsInteractorToPresenterProtocol? { get set }
     func fetchMovieDetails(movieId: Int)
     func fetchMovieVideo(movieId: Int)
+    func fetchMovieReviews(movieId: Int, page: Int)
+}
+
+protocol MovieDetailsPresenterToViewProtocol: AnyObject {
+    func didFetchMovieDetails(movieDetails: MovieDetails)
+    func didFetchMovieVideo(movieVideo: [MovieVideo])
+    func didFetchMovieReviews(movieReviews: [Review], page: Int, totalPages: Int)
+}
+
+protocol MovieDetailsInteractorToPresenterProtocol: AnyObject {
+    func didFetchMovieDetails(movieDetails: MovieDetails)
+    func didFetchMovieVideo(movieVideo: [MovieVideo])
+    func didFetchMovieReviews(movieReviews: [Review], page: Int, totalPages: Int)
+}
+
+protocol MovieDetailsPresenterToRouterProtocol: AnyObject {
+    func createModule() -> MovieDetailsVC
 }

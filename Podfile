@@ -8,4 +8,5 @@ target 'movieDB' do
   # Pods for movieDB
 	pod 'Alamofire'
 	pod 'SwiftyJSON'
+	pod 'youtube-ios-player-helper'
 end

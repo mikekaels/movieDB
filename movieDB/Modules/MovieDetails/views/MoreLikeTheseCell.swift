@@ -13,7 +13,7 @@ class moreLikeTheseCell: UICollectionViewCell {
     let image: CustomImageView = {
         let image = CustomImageView()
 //        image.image = UIImage(named: "dog")
-        image.contentMode = UIView.ContentMode.scaleAspectFill
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -27,10 +27,10 @@ class moreLikeTheseCell: UICollectionViewCell {
     
     func addViews() {
         addSubview(image)
-        image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
-        image.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0).isActive = true
-        image.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
-        image.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0).isActive = true
+        image.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        image.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        image.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
